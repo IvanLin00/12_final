@@ -13,4 +13,3 @@
   - cylinder (radius, height, x,y,z of center of top circle)
 - change the nature of vary
   - parameter to change the behavior vary changes (linear, exponential, parabolic)
-  
