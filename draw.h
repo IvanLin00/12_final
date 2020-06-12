@@ -53,5 +53,8 @@ void draw_lines( struct matrix * points, screen s, zbuffer zb, color c);
 void draw_line(int x0, int y0, double z0,
                int x1, int y1, double z1,
                screen s, zbuffer zb, color c);
+void parse_mesh(struct matrix * polygons, char *filename);
+struct matrix * generate_cylinder(double r, double h, double cx, double cy, double cz, int step);
+void add_cylinder(struct matrix *edges, double r, double h, double cx, double cy, double cz, int step);
 
 #endif

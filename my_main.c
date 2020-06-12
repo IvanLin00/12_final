@@ -430,12 +430,24 @@ void my_main() {
           //printf("Display");
           display(t);
           break;
-        // case MESH:
-        //   printf("Mesh file: %s\n", op[i].op.mesh.name);
-        //   if(op[i].op.mesh.constants != NULL){
-        //       reflect = lookup_symbol(op[i].op.mesh.constants->name)->s.c;
-        //   }
-        //   parse_mesh(tmp,op[i].op.mesh.name);
+        case MESH:
+          printf("Mesh filename: %s\n",op[i].op.mesh.name);
+          if (op[i].op.mesh.constants != NULL)
+            {
+              //printf("\tconstants: %s",op[i].op.mesh.constants->name);
+              reflect = lookup_symbol(op[i].op.mesh.constants->name)->s.c;
+            }
+          parse_mesh(tmp, op[i].op.mesh.name);
+          if(op[i].op.mesh.cs != NULL){
+            matrix_mult(op[i].op.mesh.cs->s.m, tmp);
+          }
+          else {
+            matrix_mult( peek(systems),tmp);
+          }
+          draw_polygons(tmp, t, zb, view, light, ambient,reflect);
+          tmp->lastcol = 0;
+          reflect = &white;
+          break;
       // case CYLINDER:
       //   if (op[i].op.cylinder.constants != NULL){
       //     reflect = lookup_symbol(op[i].op.cylinder.constants->name)->s.c;
