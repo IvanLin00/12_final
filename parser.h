@@ -119,6 +119,14 @@ struct command
     struct {
       double value;
     } focal;
+    // cylinder;
+    // struct{
+    //   SYMTAB *constants;
+    //   double d[4];
+    //   double r, h;
+    //   SYMTAB *cs;
+    // }
+
   } op;
 };
 

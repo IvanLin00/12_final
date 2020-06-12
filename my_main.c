@@ -445,7 +445,6 @@ void my_main() {
       //   tmp->lastcol = 0;
       //   reflect = &white;
       //   break;
-      // }
         }
       //printf("\n");
     } //end operation loop
