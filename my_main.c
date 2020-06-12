@@ -430,6 +430,12 @@ void my_main() {
           //printf("Display");
           display(t);
           break;
+        // case MESH:
+        //   printf("Mesh file: %s\n", op[i].op.mesh.name);
+        //   if(op[i].op.mesh.constants != NULL){
+        //       reflect = lookup_symbol(op[i].op.mesh.constants->name)->s.c;
+        //   }
+        //   parse_mesh(tmp,op[i].op.mesh.name);
       // case CYLINDER:
       //   if (op[i].op.cylinder.constants != NULL){
       //     reflect = lookup_symbol(op[i].op.cylinder.constants->name)->s.c;

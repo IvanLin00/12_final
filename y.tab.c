@@ -80,7 +80,7 @@
   struct matrix *m;
   int lastop=0;
   int lineno=0;
-
+  
 
 #line 86 "y.tab.c" /* yacc.c:339  */
 
@@ -151,8 +151,7 @@ extern int yydebug;
     FOCAL = 289,
     DISPLAY = 290,
     WEB = 291,
-    CO = 292,
-    CYLINDER = 293
+    CO = 292
   };
 #endif
 /* Tokens.  */
@@ -191,7 +190,6 @@ extern int yydebug;
 #define DISPLAY 290
 #define WEB 291
 #define CO 292
-#define CYLINDER 293
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -540,7 +538,7 @@ static const char *const yytname[] =
   "CS", "MESH", "TEXTURE", "STRING", "SET", "MOVE", "SCALE", "ROTATE",
   "BASENAME", "SAVE_KNOBS", "TWEEN", "FRAMES", "VARY", "PUSH", "POP",
   "SAVE", "GENERATE_RAYFILES", "SHADING", "SHADING_TYPE", "SETKNOBS",
-  "FOCAL", "DISPLAY", "WEB", "CO", "CYLINDER", "$accept", "input", "command", YY_NULLPTR
+  "FOCAL", "DISPLAY", "WEB", "CO", "$accept", "input", "command", YY_NULLPTR
 };
 #endif
 
@@ -2287,77 +2285,6 @@ yyreduce:
 }
 #line 2287 "y.tab.c" /* yacc.c:1646  */
     break;
-
-//   case 55:
-//     {
-//   lineno++;
-//   op[lastop].opcode = CYLINDER;
-//   op[lastop].op.cylinder.d[0] = (yyvsp[(2) - (6)].val);
-//   op[lastop].op.cylinder.d[1] = (yyvsp[(3) - (6)].val);
-//   op[lastop].op.cylinder.d[2] = (yyvsp[(4) - (6)].val);
-//   op[lastop].op.cylinder.d[3] = 0;
-//   op[lastop].op.cylinder.r = (yyvsp[(5) - (6)].val);
-//   op[lastop].op.cylinder.h = (yyvsp[(6) - (6)].val);
-//   op[lastop].op.cylinder.constants = NULL;
-//   op[lastop].op.cylinder.cs = NULL;
-//
-//   lastop++;
-// }
-//     break;
-//
-//   case 56:
-//     {
-//   lineno++;
-//   op[lastop].opcode = CYLINDER;
-//   op[lastop].op.cylinder.d[0] = (yyvsp[(2) - (7)].val);
-//   op[lastop].op.cylinder.d[1] = (yyvsp[(3) - (7)].val);
-//   op[lastop].op.cylinder.d[2] = (yyvsp[(4) - (7)].val);
-//   op[lastop].op.cylinder.d[3] = 0;
-//   op[lastop].op.cylinder.r = (yyvsp[(5) - (7)].val);
-//   op[lastop].op.cylinder.h = (yyvsp[(6) - (7)].val);
-//   op[lastop].op.cylinder.constants = NULL;
-//   m = (struct matrix *)new_matrix(4,4);
-//   op[lastop].op.cylinder.cs = add_symbol((yyvsp[(7) - (7)].string),SYM_MATRIX,m);
-//   lastop++;
-// }
-//     break;
-//
-//   case 57:
-//     {
-//   lineno++;
-//   op[lastop].opcode = CYLINDER;
-//   op[lastop].op.cylinder.d[0] = (yyvsp[(3) - (7)].val);
-//   op[lastop].op.cylinder.d[1] = (yyvsp[(4) - (7)].val);
-//   op[lastop].op.cylinder.d[2] = (yyvsp[(5) - (7)].val);
-//   op[lastop].op.cylinder.d[3] = 0;
-//   op[lastop].op.cylinder.r = (yyvsp[(6) - (7)].val);
-//   op[lastop].op.cylinder.h = (yyvsp[(7) - (7)].val);
-//   op[lastop].op.cylinder.cs = NULL;
-//   c = (struct constants *)malloc(sizeof(struct constants));
-//   op[lastop].op.cylinder.constants = add_symbol((yyvsp[(2) - (7)].string),SYM_CONSTANTS,c);
-//
-//   lastop++;
-// }
-//     break;
-//
-//   case 58:
-//     {
-//   lineno++;
-//   op[lastop].opcode = CYLINDER;
-//   op[lastop].op.cylinder.d[0] = (yyvsp[(3) - (8)].val);
-//   op[lastop].op.cylinder.d[1] = (yyvsp[(4) - (8)].val);
-//   op[lastop].op.cylinder.d[2] = (yyvsp[(5) - (8)].val);
-//   op[lastop].op.cylinder.d[3] = 0;
-//   op[lastop].op.cylinder.r = (yyvsp[(6) - (8)].val);
-//   op[lastop].op.cylinder.h = (yyvsp[(7) - (8)].val);
-//   c = (struct constants *)malloc(sizeof(struct constants));
-//   op[lastop].op.cylinder.constants = add_symbol((yyvsp[(2) - (8)].string),SYM_CONSTANTS,c);
-//   m = (struct matrix *)new_matrix(4,4);
-//   op[lastop].op.cylinder.cs = add_symbol((yyvsp[(8) - (8)].string),SYM_MATRIX,m);
-//
-//   lastop++;
-// }
-//     break;
 
   case 55:
 #line 765 "mdl.y" /* yacc.c:1646  */

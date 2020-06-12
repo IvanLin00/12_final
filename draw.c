@@ -796,3 +796,41 @@ void add_cylinder(struct matrix *edges, double r, double h, double cx, double cy
       points->m[0][p0], points->m[1][p0],points->m[2][p0]);
   }
 }
+
+void parse_mesh(struct matrix * polygons, char *filename){
+  FILE *f;
+  f = fopen(filename, "r");
+  char line[256];
+  char *token;
+  struct matrix *v = new_matrix(4,4);
+  if (f == NULL){
+    printf("Could not open file: %s", filename);
+    exit(0);
+  }
+  while(fgets(line,256,f) != NULL){
+    char *c = malloc(256);
+    strcpy(c, line);
+    token = strsep(&c, " ");
+    if(strncmp(token, "v", strlen(token)) == 0){
+      float x = atof(strsep(&c, " "));
+      float y = atof(strsep(&c, " "));
+      float z = atof(strsep(&c, " "));
+      add_point(v,x,y,z);
+    }
+    else if (strncmp(token, "f", strlen(token)) == 0){
+      int first = atof(strsep(&c, " ")) - 1;
+      int i;
+      int p1 = atof(strsep(&c, " ")) - 1;
+      int p2 = -1;
+      char * token;
+      while ((token = strsep(&c, " ")) != NULL){
+        p2 = atof(token) - 1;
+        add_polygon(polygons, v->m[0][first], v->m[1][first], v->m[2][first],
+                              v->m[0][p1], v->m[1][p1], v->m[2][p1],
+                              v->m[0][p2], v->m[1][p2], v->m[2][p2]);
+        p1 = p2;
+      }
+    }
+  }
+  fclose(f);
+}
