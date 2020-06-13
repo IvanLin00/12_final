@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "ml6.h"
 #include "display.h"
@@ -753,49 +754,49 @@ void draw_line(int x0, int y0, double z0,
   plot( s, zb, c, x1, y1, z );
 } //end draw_line
 
-struct matrix * generate_cylinder(double r, double h, double cx, double cy, double cz, int step){
-  double rot, x, y, z;
-  struct matrix * points = new_matrix(4, 2 * step);
-  for (r = 0; r < step; r++){
-    rot = (double) r/step;
-    x = r * cos(2 * M_PI * rot) + cx;
-    y = cy;
-    z = r * sin(-2 * M_PI * rot) + cz;
-    add_point(points,x,y,z);
-  }
-  for(r = 0; r < step; r++){
-    rot = (double) r/step;
-    x = r * cos(2 * M_PI * rot) + cx;
-    y = cy - h;
-    z = r * sin(-2 * M_PI * rot) + cz;
-  }
-  return points;
-}
+// struct matrix * generate_cylinder(double r, double h, double cx, double cy, double cz, int step){
+//   double rot, x, y, z;
+//   struct matrix * points = new_matrix(4, 2 * step);
+//   for (r = 0; r < step; r++){
+//     rot = (double) r/step;
+//     x = r * cos(2 * M_PI * rot) + cx;
+//     y = cy;
+//     z = r * sin(-2 * M_PI * rot) + cz;
+//     add_point(points,x,y,z);
+//   }
+//   for(r = 0; r < step; r++){
+//     rot = (double) r/step;
+//     x = r * cos(2 * M_PI * rot) + cx;
+//     y = cy - h;
+//     z = r * sin(-2 * M_PI * rot) + cz;
+//   }
+//   return points;
+// }
 
-void add_cylinder(struct matrix *edges, double r, double h, double cx, double cy, double cz, int step){
-  struct matrix * points = generate_cylinder(r,h,cx,cy,cz,step);
-  int p0, p1, p2, p3;
-  double top[3],bot[3];
-
-  for(int start = 0; start < step; start++){
-    p0 = step + (start % step);
-    p1 = step + ((start + 1) % step);
-    p2 = (start + 1) % step;
-    p3 = start % step;
-    add_polygon(edges, points->m[0][p0], points->m[1][p0],points->m[2][p0],
-      points->m[0][p1], points->m[1][p1],points->m[2][p1],
-      points->m[0][p2], points->m[1][p2],points->m[2][p2]);
-    add_polygon(edges, points->m[0][p0], points->m[1][p0],points->m[2][p0],
-      points->m[0][p2], points->m[1][p2],points->m[2][p2],
-      points->m[0][p3], points->m[1][p3],points->m[2][p3]);
-    add_polygon(edges,cx,cy,cz,
-      points->m[0][p3], points->m[1][p3],points->m[2][p3],
-      points->m[0][p2], points->m[1][p2],points->m[2][p2]);
-    add_polygon(edges,cx,cy-h,cz,
-      points->m[0][p1], points->m[1][p1],points->m[2][p1],
-      points->m[0][p0], points->m[1][p0],points->m[2][p0]);
-  }
-}
+// void add_cylinder(struct matrix *edges, double r, double h, double cx, double cy, double cz, int step){
+//   struct matrix * points = generate_cylinder(r,h,cx,cy,cz,step);
+//   int p0, p1, p2, p3;
+//   double top[3],bot[3];
+//
+//   for(int start = 0; start < step; start++){
+//     p0 = step + (start % step);
+//     p1 = step + ((start + 1) % step);
+//     p2 = (start + 1) % step;
+//     p3 = start % step;
+//     add_polygon(edges, points->m[0][p0], points->m[1][p0],points->m[2][p0],
+//       points->m[0][p1], points->m[1][p1],points->m[2][p1],
+//       points->m[0][p2], points->m[1][p2],points->m[2][p2]);
+//     add_polygon(edges, points->m[0][p0], points->m[1][p0],points->m[2][p0],
+//       points->m[0][p2], points->m[1][p2],points->m[2][p2],
+//       points->m[0][p3], points->m[1][p3],points->m[2][p3]);
+//     add_polygon(edges,cx,cy,cz,
+//       points->m[0][p3], points->m[1][p3],points->m[2][p3],
+//       points->m[0][p2], points->m[1][p2],points->m[2][p2]);
+//     add_polygon(edges,cx,cy-h,cz,
+//       points->m[0][p1], points->m[1][p1],points->m[2][p1],
+//       points->m[0][p0], points->m[1][p0],points->m[2][p0]);
+//   }
+// }
 
 void parse_mesh(struct matrix * polygons, char *filename){
   FILE *f;

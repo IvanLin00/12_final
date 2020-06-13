@@ -2,10 +2,8 @@
 constants brown 0.38 0.38 0.5 0.2 0.2 0.5 .07 .07 .5
 //code
 push
-move 250 450 0
-rotate x 20
-rotate y 20
-scale 0.5 0.5 0.5
+move 250 250 0
+scale 40 40 40
 mesh brown :cow.obj
 display
 save
