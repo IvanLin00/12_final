@@ -72,6 +72,7 @@ void first_pass() {
   char name_check = 0;
   char frame_check = 0;
   extern int num_frames;
+  extern int nl;
   extern char name[128];
 
   num_frames = 1;
@@ -87,6 +88,9 @@ void first_pass() {
     }
     else if (op[i].opcode == VARY) {
       vary_check = 1;
+    }
+    else if (op[i].opcode == LIGHT){
+      nl += 1;
     }
 
     if ( vary_check && !frame_check ) {
@@ -186,6 +190,7 @@ void my_main() {
   struct vary_node ** knobs;
   struct vary_node * vn;
   first_pass();
+  if (nl == 0) nl = 1;
   knobs = second_pass();
   char frame_name[128];
   int f;
@@ -204,14 +209,17 @@ void my_main() {
   ambient.green = 50;
   ambient.blue = 50;
 
-  double light[2][3];
-  light[LOCATION][0] = 0;
-  light[LOCATION][1] = 0;
-  light[LOCATION][2] = 1;
+  double light[nl][2][3];
+  struct light * curr_l;
+  int li = 0;
 
-  light[COLOR][RED] = 255;
-  light[COLOR][GREEN] = 255;
-  light[COLOR][BLUE] = 255;
+  light[li][LOCATION][0] = 0.5;
+  light[li][LOCATION][1] = 0.75;
+  light[li][LOCATION][2] = 1;
+
+  light[li][COLOR][RED] = 255;
+  light[li][COLOR][GREEN] = 255;
+  light[li][COLOR][BLUE] = 255;
 
   double view[3];
   view[0] = 0;
@@ -448,21 +456,42 @@ void my_main() {
           tmp->lastcol = 0;
           reflect = &white;
           break;
-      // case CYLINDER:
-      //   if (op[i].op.cylinder.constants != NULL){
-      //     reflect = lookup_symbol(op[i].op.cylinder.constants->name)->s.c;
-      //   }
-      //   add_cylinder(tmp,op[i].op.cylinder.r,op[i].op.cylinder.h,op[i].op.cylinder.d[0],op[i].op.cylinder.d[1],op[i].op.cylinder.d[2], step_3d);
-      //   if(op[i].op.cylinder.cs != NULL){
-      //     matrix_mult(op[i].op.cylinder.cs->s.m, tmp);
-      //   }
-      //   else{
-      //     matrix_mult(peek(systems),tmp);
-      //   }
-      //   draw_polygons(tmp,t,zb,view,light,ambient,reflect);
-      //   tmp->lastcol = 0;
-      //   reflect = &white;
-      //   break;
+        case LIGHT:
+          curr_l = lookup_symbol(op[i].op.light.p->name)->s.l;
+          light[li][LOCATION][0] = curr_l->l[0];
+          light[li][LOCATION][1] = curr_l->l[1];
+          light[li][LOCATION][2] = curr_l->l[2];
+
+          // if(op[i].op.light.q != NULL){
+          //   knob_value = lookup_symbol(op[i].op.light.q->name)->s.value;
+          //   double *axis = op[i].op.light.axis;
+          //   if(axis[0] == 1) light[li][LOCATION][0] += knob_value;
+          //   if(axis[1] == 1) light[li][LOCATION][1] += knob_value;
+          //   if(axis[2] == 1) light[li][LOCATION][2] += knob_value;
+          // }
+          light[li][COLOR][RED] = curr_l->c[0];
+          light[li][COLOR][GREEN] = curr_l->c[1];
+          light[li][COLOR][BLUE] = curr_l->c[2];
+          li++;
+          break;
+
+
+
+        // case CYLINDER:
+        //   if (op[i].op.cylinder.constants != NULL){
+        //     reflect = lookup_symbol(op[i].op.cylinder.constants->name)->s.c;
+        //   }
+        //   add_cylinder(tmp, op[i].op.cylinder.r, op[i].op.cylinder.h, op[i].op.cylinder.d[0], op[i].op.cylinder.d[1], op[i].op.cylinder.d[2], step_3d);
+        //   if(op[i].op.cylinder.cs != NULL){
+        //     matrix_mult(op[i].op.cylinder.cs->s.m, tmp);
+        //   }
+        //   else{
+        //     matrix_mult(peek(systems),tmp);
+        //   }
+        //   draw_polygons(tmp,t,zb,view,light,ambient,reflect);
+        //   tmp->lastcol = 0;
+        //   reflect = &white;
+        //   break;
         }
       //printf("\n");
     } //end operation loop

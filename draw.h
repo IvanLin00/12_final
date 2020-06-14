@@ -5,6 +5,7 @@
 #include "matrix.h"
 #include "ml6.h"
 #include "symtab.h"
+#include "parser.h"
 
 void draw_scanline(int x0, double z0, int x1, double z1, int y, screen s, zbuffer zb, color c);
 void scanline_convert( struct matrix *points, int i, screen s, zbuffer zb, color il );
@@ -15,7 +16,7 @@ void add_polygons( struct matrix * polys,
                    double x1, double y1, double z1,
                    double x2, double y2, double z2);
 void draw_polygons( struct matrix * polys, screen s, zbuffer zb,
-                    double *view, double light[2][3], color ambient,
+                    double *view, double light[nl][2][3], color ambient,
                     struct constants *reflect);
 
 //advanced shapes
@@ -54,7 +55,7 @@ void draw_line(int x0, int y0, double z0,
                int x1, int y1, double z1,
                screen s, zbuffer zb, color c);
 void parse_mesh(struct matrix * polygons, char *filename);
-struct matrix * generate_cylinder(double r, double h, double cx, double cy, double cz, int step);
-void add_cylinder(struct matrix *edges, double r, double h, double cx, double cy, double cz, int step);
 
+// void add_cylinder(struct matrix *edges, double r, double h, double cx, double cy, double cz, int step);
+// struct matrix * generate_cylinder(double r, double h, double cx, double cy, double cz, int step);
 #endif

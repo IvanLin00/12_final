@@ -50,7 +50,14 @@ struct command
       double d3[3];
       SYMTAB *p;
       SYMTAB *cs;
-    } texture;
+    } //cylinder;
+    //struct {
+      //SYMTAB *constants;
+      //double d[4];
+      //double r,h;
+      //SYMTAB *cs;
+    //}
+      texture;
     struct {
       SYMTAB *constants;
       double d[4];
@@ -119,14 +126,6 @@ struct command
     struct {
       double value;
     } focal;
-    // cylinder;
-    // struct{
-    //   SYMTAB *constants;
-    //   double d[4];
-    //   double r, h;
-    //   SYMTAB *cs;
-    // }
-
   } op;
 };
 
@@ -135,6 +134,7 @@ struct command
 extern struct command op[MAX_COMMANDS];
 //Code generator headers
 int num_frames;
+int nl;
 char name[128];
 
 struct vary_node {

@@ -179,7 +179,7 @@ void add_polygon( struct matrix *polygons,
   lines connecting each points to create bounding triangles
   ====================*/
 void draw_polygons( struct matrix *polygons, screen s, zbuffer zb,
-                    double *view, double light[2][3], color ambient,
+                    double *view, double light[nl][2][3], color ambient,
                     struct constants *reflect) {
   if ( polygons->lastcol < 3 ) {
     printf("Need at least 3 points to draw a polygon!\n");
@@ -194,10 +194,19 @@ void draw_polygons( struct matrix *polygons, screen s, zbuffer zb,
     normal = calculate_normal(polygons, point);
 
     if ( normal[2] > 0 ) {
-
+      color c;
+      c.red = 0;
+      c.green = 0;
+      c.blue = 0;
       // get color value only if front facing
-      color i = get_lighting(normal, view, ambient, light, reflect);
-      scanline_convert(polygons, point, s, zb, i);
+      for(int cur_index = 0; cur_index < nl; cur_index++){
+        color i = get_lighting(normal, view, ambient, light[cur_index], reflect);
+        c.red += i.red;
+        c.green += i.green;
+        c.blue += i.blue;
+      }
+      limit_color(&c);
+      scanline_convert(polygons, point, s, zb, c);
 
       /* draw_line( polygons->m[0][point], */
       /*            polygons->m[1][point], */
@@ -754,6 +763,7 @@ void draw_line(int x0, int y0, double z0,
   plot( s, zb, c, x1, y1, z );
 } //end draw_line
 
+// Code for Cylinder Attempt
 // struct matrix * generate_cylinder(double r, double h, double cx, double cy, double cz, int step){
 //   double rot, x, y, z;
 //   struct matrix * points = new_matrix(4, 2 * step);
