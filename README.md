@@ -1,5 +1,11 @@
 # 12_final
 ## Ivan Lin Period 5
+## Features
+- Implemented
+  - Light: light r g b x y z
+  - Mesh: mesh: name_of_file
+- Does Not Work
+  - Cylinder
 ## Proposal
 ### New Features
 - light
