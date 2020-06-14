@@ -462,13 +462,6 @@ void my_main() {
           light[li][LOCATION][1] = curr_l->l[1];
           light[li][LOCATION][2] = curr_l->l[2];
 
-          // if(op[i].op.light.q != NULL){
-          //   knob_value = lookup_symbol(op[i].op.light.q->name)->s.value;
-          //   double *axis = op[i].op.light.axis;
-          //   if(axis[0] == 1) light[li][LOCATION][0] += knob_value;
-          //   if(axis[1] == 1) light[li][LOCATION][1] += knob_value;
-          //   if(axis[2] == 1) light[li][LOCATION][2] += knob_value;
-          // }
           light[li][COLOR][RED] = curr_l->c[0];
           light[li][COLOR][GREEN] = curr_l->c[1];
           light[li][COLOR][BLUE] = curr_l->c[2];
