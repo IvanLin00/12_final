@@ -2,8 +2,8 @@
 ## Ivan Lin Period 5
 ## Features
 - Implemented
-  - Light: light r g b x y z
-  - Mesh: mesh: name_of_file
+  - Light: light variable_name r g b x y z
+  - Mesh: mesh constant: name_of_file
 - Does Not Work
   - Cylinder
 ## Proposal
